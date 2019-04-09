@@ -13,8 +13,6 @@ package src.examSources;
 */
 
 import java.util.ArrayList;
-import java.util.Arrays;
-
 public class ReturnSumIndicies
 {
 	public static int[] twoIndiciesToEqualTarget(int[] numbers, int target)

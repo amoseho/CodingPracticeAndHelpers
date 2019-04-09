@@ -1,7 +1,10 @@
 package src;
 
+import javafx.util.Pair;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class CommonHelperMethods
 {
@@ -98,5 +101,18 @@ public class CommonHelperMethods
 		}
 
 		return returnList;
+	}
+
+	public static Pair<Integer,Integer> addTwoSingleDigitIntegers(Integer a, Integer b)
+	{
+		return addTwoSingleDigitIntegers(a,b,10);
+	}
+
+	public static Pair<Integer,Integer> addTwoSingleDigitIntegers(Integer a, Integer b, Integer base)
+	{
+		Integer sum = a+b;
+
+		Pair<Integer, Integer> onesDigitAndOverflowPair = new Pair<>((sum % base), (sum / base));
+		return onesDigitAndOverflowPair;
 	}
 }
