@@ -1,5 +1,10 @@
 package src.examSources;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+
 /*
 Design and implement a data structure for Least Recently Used (LRU) cache.
 It should support the following operations: get and put.
@@ -27,9 +32,22 @@ LRUCache cache = new LRUCache( 2  /* the capacity /* );
  */
 public class LRUCache
 {
+	LinkedList<Integer> keysCache;
+	//ArrayList<Integer> keysCache;	//Best way involves only using ArrayList<CustomNode> keysCache.
+									//CustomNode class would have Integer key, implement the compare function like an Integer
+									//And have an int/Integer value as an addon item. Key here to implement the .equals
+									//function of it to use ONLY the key.
+	HashMap<Integer, Integer> keyValueMappings;
+	Integer currentCapacity;
+	Integer maxCapacity;
+
 	public LRUCache(int capacity)
 	{
-
+		//keysCache = new ArrayList<>(capacity);
+		keysCache = new LinkedList<Integer>();
+		maxCapacity = capacity;
+		currentCapacity = 0;
+		keyValueMappings = new HashMap<>(capacity);
 	}
 
 	//Returns value.
@@ -38,20 +56,48 @@ public class LRUCache
 	public int get(int key)
 	{
 		//find it
-		//TODO: Logic
-		//if found, return value
-		//else return -1;
-		return 0;
+		Integer keyIndex = keysCache.indexOf(Integer.valueOf(key));
+		//If not found, return -1;
+		if(keyIndex == -1)
+		{
+			return -1;
+		}
+		//Otherwise return the value, and set it as most recently accessed.
+		Integer keyMostRecentlyAccessed = keysCache.get(keyIndex);
+		keysCache.remove(keyMostRecentlyAccessed);
+		keysCache.addFirst(keyMostRecentlyAccessed);
+		return keyValueMappings.get(keyMostRecentlyAccessed);
 	}
 
 	public void put(int key, int value)
 	{
-		//Are we at capacity?
-		//If so, calculate the least old
-			//delete it
-			//recalculate or replace least-old with 2nd-least old
+		//do we just need to update?
+		if(get(key) > -1)
+		{
+			//set the value. The keysCache already put it in front
+			keyValueMappings.put(key, value);
+			return;
+		}
 
-		//At this point we should have capacity whether or not the above occurred
-		//Add the item normally.
+		//Are we at capacity?
+		if(currentCapacity >= maxCapacity)
+		{
+			//It is not found, so we must make room to add it
+			//If so, calculate the least old //automagically done
+			//delete it
+			Integer keyRemoved = keysCache.removeLast();
+			keyValueMappings.remove(keyRemoved);
+
+			//add the new one
+			keysCache.addLast(key);
+			keyValueMappings.put(key, value);
+		}
+		else
+		{
+			//Add the item normally otherwise.
+			keysCache.addLast(key);
+			keyValueMappings.put(key, value);
+			currentCapacity++;
+		}
 	}
 }
