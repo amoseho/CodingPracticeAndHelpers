@@ -1,6 +1,7 @@
-package src.examSources;
+package src.test;
 
 import org.junit.jupiter.api.Test;
+import src.examSources.LRUCache;
 
 import java.util.ArrayList;
 
