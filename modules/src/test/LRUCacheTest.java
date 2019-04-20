@@ -19,23 +19,6 @@ class LRUCacheTest
 	}
 
 	@Test
-	void sizeTwoCachePutOverrides_AlsoLeetCodeExample()
-	{
-		cache = new LRUCache( 2 /* capacity */ );
-
-		cache.put(1, 1);
-		cache.put(2, 2);
-		assert cache.get(1) == 1;       // returns 1
-		cache.put(3, 3);    			// evicts key 2
-		assert cache.get(2) == -1;      // returns -1 (not found)
-		cache.put(4, 4);    			// evicts key 3
-		assert cache.get(1) == 1;       // returns 1
-		assert cache.get(2) == -1;		// returns -1
-		assert cache.get(3) == -1;      // returns -1
-		assert cache.get(4) == 4;       // returns 4
-	}
-
-	@Test
 	void runtimeErrorLeetcodeTest()
 	{
 		/*
@@ -73,8 +56,24 @@ class LRUCacheTest
 		String[] commands = new String[]{"LRUCache", "put", "put", "get", "put", "get", "put", "get", "get", "get"};
 		Integer[][] input = new Integer[][]{{2}, {1, 1}, {2, 2}, {1}, {3, 3}, {2}, {4, 4}, {1}, {3}, {4}};
 		Object[] output = performActions(commands, input);
-		Integer[] expected = {null,null,null,1,null,-1,null,-1,3,4};
-		assert expected.equals(output);
+		Integer[] expected = {null,null,1,null,-1,null,-1,3,4};
+		assertEquals(output, expected);
+	}
+
+	private void assertEquals(Object[] output, Integer[] expected)
+	{
+		for(int i = 0; i < expected.length; i++)
+		{
+			Integer integer = (Integer) output[i];
+			if(integer == null)
+			{
+				assert expected[i] == null;
+			}
+			else
+			{
+				assert integer.equals(expected[i]);
+			}
+		}
 	}
 
 	private Object[] performActions(String[] commands, Integer[][] input)
@@ -92,6 +91,7 @@ class LRUCacheTest
 				System.out.println("Put " + input[i][0] + "," + input[i][1]);
 				cache.put(input[i][0],input[i][1]);
 				output.add(null);
+				printStatusOfCache(cache);
 			}
 			else	//else it's a get
 			{
@@ -102,5 +102,11 @@ class LRUCacheTest
 			}
 		}
 		return output.toArray();
+	}
+
+	private void printStatusOfCache(LRUCache cache)
+	{
+		System.out.println("List of Cache: " + cache.keysCache.toString());
+		System.out.println("List of keyValues: " + cache.keyValueMappings.toString());
 	}
 }

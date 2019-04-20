@@ -32,14 +32,14 @@ LRUCache cache = new LRUCache( 2  /* the capacity /* );
  */
 public class LRUCache
 {
-	LinkedList<Integer> keysCache;
+	public LinkedList<Integer> keysCache;
 	//ArrayList<Integer> keysCache;	//Best way involves only using ArrayList<CustomNode> keysCache.
 									//CustomNode class would have Integer key, implement the compare function like an Integer
 									//And have an int/Integer value as an addon item. Key here to implement the .equals
 									//function of it to use ONLY the key.
-	HashMap<Integer, Integer> keyValueMappings;
-	Integer currentCapacity;
-	Integer maxCapacity;
+	public HashMap<Integer, Integer> keyValueMappings;
+	public Integer currentCapacity;
+	public Integer maxCapacity;
 
 	public LRUCache(int capacity)
 	{
@@ -89,13 +89,13 @@ public class LRUCache
 			keyValueMappings.remove(keyRemoved);
 
 			//add the new one
-			keysCache.addLast(key);
+			keysCache.addFirst(key);
 			keyValueMappings.put(key, value);
 		}
 		else
 		{
 			//Add the item normally otherwise.
-			keysCache.addLast(key);
+			keysCache.addFirst(key);
 			keyValueMappings.put(key, value);
 			currentCapacity++;
 		}
