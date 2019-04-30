@@ -3,6 +3,8 @@ package src;
 public class Main {
 	public static void main(String args[])
 	{
-		//PasswordStengtheningChecker passwordChecker; //Incomplete
+		//StringPartitioningMaximum //WIP
+		//PasswordStengtheningChecker //WIP
+
 	}
 }
