@@ -10,6 +10,8 @@ public class FindLargestIsland
 	{
 		Integer longestChain = 0;
 		Integer currentChain = 0;
+		Integer numberOfIslands = 0;
+		HashMap<Integer,List<Integer>> nodesExamined = new HashMap<>();
 
 		for(int i = 0; i < pictureArray.length; i++)
 		{
@@ -17,7 +19,10 @@ public class FindLargestIsland
 			{
 				//See if it's a black-pixel hit
 				System.out.println("currently examining pixels: " + i + ", " + k);
-				if(pictureArray[i][k] == true)
+				List<Integer> yVisited = nodesExamined.get(i);
+				if(yVisited == null) yVisited = new ArrayList<>();
+				boolean nodeVisited = yVisited.contains(k);
+				if(pictureArray[i][k] == true && !nodeVisited)
 				{
 					HashMap<Integer,List<Integer>> nodesVisited = new HashMap<>();
 					howLongIsTheChainConnectedToPointXY(pictureArray, i, k, nodesVisited);
@@ -27,7 +32,16 @@ public class FindLargestIsland
 					for(Integer key : nodesVisited.keySet())
 					{
 						currentChain += nodesVisited.get(key).size();
+						for(Integer yCoord : nodesVisited.get(key))
+						{
+							addYCoordinateToXVisitedList(nodesExamined, key, yCoord);
+						}
 					}
+					numberOfIslands++;
+				}
+				else
+				{
+					addYCoordinateToXVisitedList(nodesExamined, i, k);
 				}
 
 				if( currentChain > longestChain)
@@ -38,7 +52,7 @@ public class FindLargestIsland
 				//Record as we finish.
 			}
 		}
-
+		System.out.println("Number of Islands, FYI: " + numberOfIslands);
 		return longestChain;
 	}
 
@@ -47,20 +61,7 @@ public class FindLargestIsland
 														   HashMap<Integer,List<Integer>> nodesVisited)
 	{
 		//As we're finding out, make sure we don't loop in a square
-		List<Integer> listRetrieved = nodesVisited.get(x);
-		if(listRetrieved != null && listRetrieved.contains(y) == true)
-		{
-			return;
-		}
-		else
-		{
-			if(listRetrieved == null)
-			{
-				listRetrieved = new ArrayList<Integer>();
-			}
-			listRetrieved.add(y);
-			nodesVisited.put(x, listRetrieved);
-		}
+		if(!addYCoordinateToXVisitedList(nodesVisited, x, y)) return;
 
 		//Find out how long this chain goes
 		if(x-1 >= 0 && pictureArray[x-1][y] == true )
@@ -81,9 +82,23 @@ public class FindLargestIsland
 		}
 	}
 
-	public static boolean isCoordinateContainedInMap(HashMap<Integer,List<Integer>> nodesVisited)
+	public static boolean addYCoordinateToXVisitedList(HashMap<Integer,List<Integer>> nodesVisited, int x, int y)
 	{
-		return false;
+		List<Integer> listRetrieved = nodesVisited.get(x);
+		if(listRetrieved != null && listRetrieved.contains(y) == true)
+		{
+			return false;
+		}
+		else
+		{
+			if(listRetrieved == null)
+			{
+				listRetrieved = new ArrayList<Integer>();
+			}
+			listRetrieved.add(y);
+			nodesVisited.put(x, listRetrieved);
+			return true;
+		}
 	}
 }
 
