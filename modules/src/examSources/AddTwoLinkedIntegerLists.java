@@ -11,9 +11,8 @@ Output: 7 -> 0 -> 8
 Explanation: 342 + 465 = 807.
  */
 
-
-import javafx.util.Pair;
 import src.CommonHelperMethods;
+import src.Pair;
 
 public class AddTwoLinkedIntegerLists
 {

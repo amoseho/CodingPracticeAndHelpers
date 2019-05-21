@@ -1,6 +1,6 @@
 package src.examSources;
 
-import javafx.util.Pair;
+import src.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
