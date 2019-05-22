@@ -12,16 +12,11 @@ Explanation: 342 + 465 = 807.
  */
 
 import src.CommonHelperMethods;
+import src.ListNode;
 import src.Pair;
 
 public class AddTwoLinkedIntegerLists
 {
-	public static class ListNode
-	{
-		public int val;
-		public ListNode next;
-		public ListNode(int x) { val = x; }
-	}
 
 	public static ListNode addTwoNumbers(ListNode l1, ListNode l2)
 	{

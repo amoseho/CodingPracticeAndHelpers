@@ -1,9 +1,8 @@
 package src.test;
 
 import org.junit.jupiter.api.Test;
+import src.ListNode;
 import src.examSources.AddTwoLinkedIntegerLists;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class AddTwoLinkedIntegerListsTest
 {
@@ -14,14 +13,14 @@ class AddTwoLinkedIntegerListsTest
 		//Output: 7 -> 0 -> 8
 		//Explanation: 342 + 465 = 807
 
-		AddTwoLinkedIntegerLists.ListNode listNode1 = new AddTwoLinkedIntegerLists.ListNode(2);
-		listNode1.next = new AddTwoLinkedIntegerLists.ListNode(4);
-		listNode1.next.next = new AddTwoLinkedIntegerLists.ListNode(3);
-		AddTwoLinkedIntegerLists.ListNode listNode2 = new AddTwoLinkedIntegerLists.ListNode(5);
-		listNode2.next = new AddTwoLinkedIntegerLists.ListNode(6);
-		listNode2.next.next = new AddTwoLinkedIntegerLists.ListNode(4);
+		ListNode listNode1 = new ListNode(2);
+		listNode1.next = new ListNode(4);
+		listNode1.next.next = new ListNode(3);
+		ListNode listNode2 = new ListNode(5);
+		listNode2.next = new ListNode(6);
+		listNode2.next.next = new ListNode(4);
 
-		AddTwoLinkedIntegerLists.ListNode resultNode = AddTwoLinkedIntegerLists.addTwoNumbers(listNode1, listNode2);
+		ListNode resultNode = AddTwoLinkedIntegerLists.addTwoNumbers(listNode1, listNode2);
 		assert resultNode.val == 7;
 		assert resultNode.next.val == 0;
 		assert resultNode.next.next.val == 8;
@@ -34,11 +33,11 @@ class AddTwoLinkedIntegerListsTest
 		//Output: 0 -> 0 -> 1
 		//Explanation: 99 + 1 = 100
 
-		AddTwoLinkedIntegerLists.ListNode listNode1 = new AddTwoLinkedIntegerLists.ListNode(9);
-		listNode1.next = new AddTwoLinkedIntegerLists.ListNode(9);
-		AddTwoLinkedIntegerLists.ListNode listNode2 = new AddTwoLinkedIntegerLists.ListNode(1);
+		ListNode listNode1 = new ListNode(9);
+		listNode1.next = new ListNode(9);
+		ListNode listNode2 = new ListNode(1);
 
-		AddTwoLinkedIntegerLists.ListNode resultNode = AddTwoLinkedIntegerLists.addTwoNumbers(listNode1, listNode2);
+		ListNode resultNode = AddTwoLinkedIntegerLists.addTwoNumbers(listNode1, listNode2);
 		assert resultNode.val == 0;
 		assert resultNode.next.val == 0;
 		assert resultNode.next.next.val == 1;
