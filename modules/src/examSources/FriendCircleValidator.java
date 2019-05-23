@@ -63,22 +63,42 @@ public class FriendCircleValidator
 			//guaranteed to be N*N
 			for(int j = 0; j < friendMap.length; j++)
 			{
-//				Pair<Integer, Integer> currentCoordinate = new Pair<>(i,j);
 				if(friendMap[i][j] == 1 && !friendsOfCurrentPerson.contains(j))
 				{
 					friendsOfCurrentPerson.add(j);
 				}
-
-				//iterate the map looking for a friend
-//				if(friendMap[i][j] == 1 && !coordinatesVisited.contains(currentCoordinate))
-//				{
-//					traverseMap(friendMap, i, j, coordinatesVisited);
-//					friendCircles++;
-//				}
 			}
+			friendsFriends.set(i, friendsOfCurrentPerson);
+		}
+
+		for(int i = 0; i < friendsFriends.size(); i++)
+		{
+			//For every friend of this friend
+			//Check all their friends
+			//True-ify me cap'n.
+			truifyAllFriendsForFriendsOfIndex(i, friendsFriends, friendsAccountedFor);
+			friendCircles++;
 		}
 
 		return friendCircles;
+	}
+
+	private static void truifyAllFriendsForFriendsOfIndex(Integer friend, List<List<Integer>> friendsFriends,
+														  HashMap<Integer, Boolean> friendsAccountedFor)
+	{
+		List<Integer> friendsOfCurrentPerson = friendsFriends.get(friend);
+		for(Integer currentFriend : friendsOfCurrentPerson)
+		{
+			if(friendsAccountedFor.get(currentFriend))
+			{
+				continue;
+			}
+			else
+			{
+				friendsAccountedFor.put(friend, true);
+				truifyAllFriendsForFriendsOfIndex(friend, friendsFriends, friendsAccountedFor);
+			}
+		}
 	}
 
 	private static void traverseMap(int[][] friendMap, int i, int j, List<Pair<Integer, Integer>> coordinatesVisited)
