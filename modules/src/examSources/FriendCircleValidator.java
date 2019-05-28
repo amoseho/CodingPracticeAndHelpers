@@ -27,11 +27,10 @@ M[i][i] = 1 for all students.
 If M[i][j] = 1, then M[j][i] = 1.
  */
 
-import src.Pair;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FriendCircleValidator
 {
@@ -46,15 +45,6 @@ public class FriendCircleValidator
 			friendsFriends.add(friends);
 		}
 		//Now we have N empty lists. Cool.
-
-		HashMap<Integer,Boolean> friendsAccountedFor = new HashMap<>();
-		for(int i = 0; i < friendMap.length; i++)
-		{
-			friendsAccountedFor.put(i, false);
-		}
-		//Now we have N false friends. Cool.
-
-		List<Pair<Integer, Integer>> coordinatesVisited = new ArrayList<>(friendMap.length);
 
 		for(int i = 0; i < friendMap.length; i++)
 		{
@@ -71,84 +61,69 @@ public class FriendCircleValidator
 			friendsFriends.set(i, friendsOfCurrentPerson);
 		}
 
-		for(int i = 0; i < friendsFriends.size(); i++)
+		HashMap<Integer,Boolean> friendsMapped = getEmptyFriendsMap(friendMap);
+		//Now we have N false friends. Cool.
+
+		while(friendsMapped.values().contains(false))
 		{
-			//For every friend of this friend
-			//Check all their friends
-			//True-ify me cap'n.
-			truifyAllFriendsForFriendsOfIndex(i, friendsFriends, friendsAccountedFor);
+			Integer currentFriendStartIndex = 0;
+			for(Map.Entry friendEntry : friendsMapped.entrySet())
+			{
+				if(friendEntry.getValue().equals(false))
+				{
+					currentFriendStartIndex = (Integer) friendEntry.getKey();
+					break;
+				}
+			}
+			//do the thing
+			markMappedChainsAsTrue(currentFriendStartIndex, friendsFriends, friendsMapped);
 			friendCircles++;
 		}
 
 		return friendCircles;
 	}
 
-	private static void truifyAllFriendsForFriendsOfIndex(Integer friend, List<List<Integer>> friendsFriends,
-														  HashMap<Integer, Boolean> friendsAccountedFor)
+	private static void markMappedChainsAsTrue(Integer currentFriendStartIndex, List<List<Integer>> friendsFriends,
+											   HashMap<Integer, Boolean> friendsMapped)
 	{
-		List<Integer> friendsOfCurrentPerson = friendsFriends.get(friend);
-		for(Integer currentFriend : friendsOfCurrentPerson)
+		List<Integer> friendsOfCurrent = new ArrayList<>();
+		//iterate through friends of current
+		for(Integer friendOfCurrent : friendsFriends.get(currentFriendStartIndex))
 		{
-			if(friendsAccountedFor.get(currentFriend))
+			if(friendsMapped.get(friendOfCurrent))
 			{
+				//skip this
 				continue;
 			}
 			else
 			{
-				friendsAccountedFor.put(friend, true);
-				truifyAllFriendsForFriendsOfIndex(friend, friendsFriends, friendsAccountedFor);
+				//Any found, mark true in friendsMapped.
+				//Add them to a list to eval later
+				friendsOfCurrent.add(friendOfCurrent);
+				friendsMapped.put(friendOfCurrent, true);
+			}
+		}
+		//If at least 1 item added, iterate. ELSE, don't iterate.
+		if(friendsOfCurrent.isEmpty())
+		{
+			return;
+		}
+		else
+		{
+			for(Integer friend : friendsOfCurrent)
+			{
+				markMappedChainsAsTrue(friend, friendsFriends, friendsMapped);
 			}
 		}
 	}
 
-	private static void traverseMap(int[][] friendMap, int i, int j, List<Pair<Integer, Integer>> coordinatesVisited)
+	private static HashMap<Integer, Boolean> getEmptyFriendsMap(int[][] friendMap)
 	{
-		Pair currentCoordinate = new Pair(i, j);
-		//Add it to the coords visited
-		addCoordinateToList(currentCoordinate, coordinatesVisited);
-
-		//Check up
-		currentCoordinate = new Pair<>(i-1, j);
-		if(!coordinatesVisited.contains(currentCoordinate) && (i > 0) && (friendMap[i-1][j] == 1))
+		HashMap<Integer,Boolean> friendsAccountedFor = new HashMap<>();
+		for(int i = 0; i < friendMap.length; i++)
 		{
-			traverseMap(friendMap, i-1, j, coordinatesVisited);
+			friendsAccountedFor.put(i, false);
 		}
-		//Check down
-		currentCoordinate = new Pair<>(i+1, j);
-		if(!coordinatesVisited.contains(currentCoordinate) && ((i+1) < friendMap.length) && (friendMap[i+1][j] == 1))
-		{
-			traverseMap(friendMap, i+1, j, coordinatesVisited);
-		}
-		//Check left
-		currentCoordinate = new Pair<>(i, j-1);
-		if(!coordinatesVisited.contains(currentCoordinate) && (j > 0) && (friendMap[i][j-1] == 1))
-		{
-			traverseMap(friendMap, i, j-1, coordinatesVisited);
-		}
-		//Check right
-		currentCoordinate = new Pair<>(i, j+1);
-		if(!coordinatesVisited.contains(currentCoordinate) && ((j+1) < friendMap.length) && (friendMap[i][j+1] == 1))
-		{
-			traverseMap(friendMap, i, j+1, coordinatesVisited);
-		}
-
-		//Return. We scouted the whole island, I mean, friend group
-		return;
-	}
-
-	private static void addCoordinateToList(Pair currentCoordinate, List<Pair<Integer, Integer>> coordinatesVisited)
-	{
-		if(coordinatesVisited.contains(currentCoordinate))
-		{
-			try
-			{
-				throw new Exception("Wait what");
-			}
-			catch (Exception e)
-			{
-				e.printStackTrace();
-			}
-		}
-		coordinatesVisited.add(currentCoordinate);
+		return friendsAccountedFor;
 	}
 }
