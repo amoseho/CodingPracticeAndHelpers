@@ -9,7 +9,7 @@ public class PalindromableValidator
 Your previous JavaScript content is preserved below:
 
 function isPalindromable(input) {
-  // TODO: implement
+  // TO DO: implement
   return false;
 }
 
