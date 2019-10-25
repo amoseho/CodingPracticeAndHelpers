@@ -1,7 +1,7 @@
 package src.test;
 
 import org.junit.jupiter.api.Test;
-import src.examSources.IntegerIsPalindrome;
+import src.examSources.IntegerPalindromeValidator;
 
 class IntegerIsPalindromeTest
 {
@@ -9,7 +9,7 @@ class IntegerIsPalindromeTest
 	void testSimpleNegativeCase()
 	{
 		int i = -121;
-		boolean output = IntegerIsPalindrome.isIntegerPalindrome(i);
+		boolean output = IntegerPalindromeValidator.isIntegerPalindrome(i);
 		System.out.println(output);
 		assert output == false;
 	}
@@ -18,7 +18,7 @@ class IntegerIsPalindromeTest
 	void testSimplePositiveCase()
 	{
 		int i = 121;
-		boolean output = IntegerIsPalindrome.isIntegerPalindrome(i);
+		boolean output = IntegerPalindromeValidator.isIntegerPalindrome(i);
 		System.out.println(output);
 		assert output == true;
 	}
@@ -27,7 +27,7 @@ class IntegerIsPalindromeTest
 	void testSimplePositiveZeroCase()
 	{
 		int i = 1210;
-		boolean output = IntegerIsPalindrome.isIntegerPalindrome(i);
+		boolean output = IntegerPalindromeValidator.isIntegerPalindrome(i);
 		System.out.println(output);
 		assert output == false;
 	}
@@ -36,7 +36,7 @@ class IntegerIsPalindromeTest
 	void testSimpleNegativeZeroLeadingCase()
 	{
 		int i = 01210;
-		boolean output = IntegerIsPalindrome.isIntegerPalindrome(i);
+		boolean output = IntegerPalindromeValidator.isIntegerPalindrome(i);
 		System.out.println(output);
 		assert output == false;
 	}
@@ -45,7 +45,7 @@ class IntegerIsPalindromeTest
 	void testSimplePositiveEvenCase()
 	{
 		int i = 1221;
-		boolean output = IntegerIsPalindrome.isIntegerPalindrome(i);
+		boolean output = IntegerPalindromeValidator.isIntegerPalindrome(i);
 		System.out.println(output);
 		assert output == true;
 	}
@@ -54,7 +54,7 @@ class IntegerIsPalindromeTest
 	void testSimpleNegativeEvenCase()
 	{
 		int i = 1212;
-		boolean output = IntegerIsPalindrome.isIntegerPalindrome(i);
+		boolean output = IntegerPalindromeValidator.isIntegerPalindrome(i);
 		System.out.println(output);
 		assert output == false;
 	}
