@@ -29,6 +29,7 @@ public class IntegerPalindromeValidator
 {
 	public static boolean isIntegerPalindrome(int a)
 	{
+		if(a == 0) return true;	//special case
 		//a mod 10 being 0 necessitates a leading 0. Not possible. Also avoids a logic error at while(a > 0)
 		if (a < 0 || a%10 == 0) return false;
 		List<Integer> reverseIntegerList = new ArrayList<>();

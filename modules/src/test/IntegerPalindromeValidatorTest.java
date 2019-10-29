@@ -3,7 +3,7 @@ package src.test;
 import org.junit.jupiter.api.Test;
 import src.examSources.IntegerPalindromeValidator;
 
-class IntegerIsPalindromeTest
+class IntegerPalindromeValidatorTest
 {
 	@Test
 	void testSimpleNegativeCase()
