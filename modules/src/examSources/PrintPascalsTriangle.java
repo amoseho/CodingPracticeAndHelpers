@@ -23,7 +23,7 @@ public class PrintPascalsTriangle
 		row1.add(1);
 		pascalsTriangle.add(row1);
 
-		for(int i = 0; i < n; i++)	//for each row we have to fill, from [0-n)
+		for(int i = 1; i < n; i++)	//for each row we have to fill, from [1-n), we already filled in the 0th row
 		{
 			//Create a new row, start with a 1
 			List<Integer> newRow = new ArrayList<>();
