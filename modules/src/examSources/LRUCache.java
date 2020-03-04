@@ -38,6 +38,8 @@ public class LRUCache
 									//And have an int/Integer value as an addon item. Key here to implement the .equals
 									//function of it to use ONLY the key.
 	public HashMap<Integer, Integer> keyValueMappings;
+	//Better to have hash map of <Integer, ListNode> , where the listNode would be a doubly linked list pointer
+	//And the integer would be its key. The node would contain the key and value. Position inferred from prev and next pointers.
 	public Integer currentCapacity;
 	public Integer maxCapacity;
 
