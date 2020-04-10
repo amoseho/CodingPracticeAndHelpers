@@ -1,10 +1,8 @@
 package src.test;
 
 import org.junit.jupiter.api.Test;
-import src.Pair;
+import src.helperClasses.Pair;
 import src.examSources.MovieTheatreTimingsValidator;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class MovieTheatreTimingsValidatorTest
 {

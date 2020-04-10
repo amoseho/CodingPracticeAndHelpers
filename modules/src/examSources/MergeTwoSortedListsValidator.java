@@ -1,6 +1,6 @@
 package src.examSources;
 
-import src.ListNode;
+import src.helperClasses.ListNode;
 
 import java.util.LinkedList;
 

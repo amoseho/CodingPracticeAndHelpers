@@ -1,10 +1,8 @@
 package src.test;
 
 import org.junit.jupiter.api.Test;
-import src.ListNode;
+import src.helperClasses.ListNode;
 import src.examSources.MergeTwoSortedListsValidator;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class MergeTwoSortedListsValidatorTest
 {

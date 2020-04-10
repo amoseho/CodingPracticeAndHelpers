@@ -1,16 +1,13 @@
 package src.test;
 
 import org.junit.jupiter.api.Test;
-import src.Pair;
+import src.helperClasses.Pair;
 import src.examSources.HealthCoverageChildCountValidator;
 import src.helperClasses.Coveree;
 import src.helperClasses.MedicalPlan;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class HealthCoverageChildCountValidatorTest
 {

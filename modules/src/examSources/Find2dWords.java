@@ -1,6 +1,6 @@
 package src.examSources;
 
-import src.Pair;
+import src.helperClasses.Pair;
 
 import java.util.ArrayList;
 import java.util.List;

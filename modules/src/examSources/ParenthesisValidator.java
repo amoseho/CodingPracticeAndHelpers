@@ -1,6 +1,6 @@
 package src.examSources;
 
-import src.CommonHelperMethods;
+import src.helperClasses.CommonHelperMethods;
 
 import java.util.List;
 

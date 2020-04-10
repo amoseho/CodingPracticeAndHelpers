@@ -11,9 +11,9 @@ Output: 7 -> 0 -> 8
 Explanation: 342 + 465 = 807.
  */
 
-import src.CommonHelperMethods;
-import src.ListNode;
-import src.Pair;
+import src.helperClasses.CommonHelperMethods;
+import src.helperClasses.ListNode;
+import src.helperClasses.Pair;
 
 public class AddTwoLinkedIntegerLists
 {

@@ -1,13 +1,10 @@
 package src.test;
 
 import org.junit.jupiter.api.Test;
-import src.Pair;
 import src.examSources.Find2dWords;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class Find2dWordsTest
 {

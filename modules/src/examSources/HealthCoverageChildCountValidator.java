@@ -21,7 +21,7 @@ Expected output
 (member_id, childCount)
  */
 
-import src.Pair;
+import src.helperClasses.Pair;
 import src.helperClasses.Coveree;
 import src.helperClasses.MedicalPlan;
 

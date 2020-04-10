@@ -13,7 +13,7 @@ Length of Operation: 862 minutes
 I can play the movie 8 times, with it start on a 5 interval 5 times. On the 1st, 3rd, 4th, 6th, and 7th play.
  */
 
-import src.Pair;
+import src.helperClasses.Pair;
 
 import java.util.ArrayList;
 import java.util.List;

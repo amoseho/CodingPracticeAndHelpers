@@ -1,7 +1,7 @@
 package src.test;
 
 import org.junit.jupiter.api.Test;
-import src.ListNode;
+import src.helperClasses.ListNode;
 import src.examSources.AddTwoLinkedIntegerLists;
 
 class AddTwoLinkedIntegerListsTest
