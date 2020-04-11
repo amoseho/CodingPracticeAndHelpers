@@ -24,7 +24,14 @@ public class PermutationsValidator
 			//Recurse down the line
 			permutations = returnPermutationsStartingWith(base, subList);
 			//Add the current index's list of combinations to the output.
-			permutationOutputs.addAll(permutations);
+			for(List<Integer> list : permutations)
+			{
+				if(!permutationOutputs.contains(list))
+				{
+					permutationOutputs.add(list);
+				}
+			}
+			//permutationOutputs.addAll(permutations);
 		}
 
 		return permutationOutputs;

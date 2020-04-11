@@ -64,6 +64,15 @@ class PermutationsValidatorTest
 	}
 
 	@Test
+	public void happy112CaseRecruse()
+	{
+		List<Integer> inputList = new ArrayList<>(Arrays.asList(1,1,2));
+
+		List<List<Integer>> output = PermutationsValidator.getPermutationsRecursively(inputList);
+		System.out.println("Forget automatic validation on this");
+	}
+
+	@Test
 	public void happy1234CaseRecruse()
 	{
 		List<Integer> inputList = new ArrayList<>(Arrays.asList(1,2,3,4));
