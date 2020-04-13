@@ -18,6 +18,7 @@ public class ParenthesisValidator
 				openCount++;
 			}
 			else
+			if(s.equals(")"))
 			{
 				openCount--;
 			}
