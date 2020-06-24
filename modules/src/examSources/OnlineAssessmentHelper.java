@@ -8,30 +8,10 @@ import java.util.*;
 
 public class OnlineAssessmentHelper
 {
-	static class Solution {
-		public static int computeDifficulty(String word, Set<Character> chars)
-		{
-			int counter = 0;
-			char[] charactersInWord = word.toCharArray();
-
-			for(char c: charactersInWord)
-			{
-				if(chars.contains(c))
-				{
-					counter++;
-				}
-			}
-			return counter;
-		}
-	}
-
 	public static void main(String[] args)
 	{
 		String word = "aaabbcccd";
 		Set<Character> chars = new HashSet<Character>(Arrays.asList('a', 'b'));
-		int answer = Solution.computeDifficulty(word, chars);
-		System.out.println("My answer: " + answer);
-		System.out.println("Expected answer: " + 3);
 	}
 
 	////*********************************START Determine if loop in directed edge graph

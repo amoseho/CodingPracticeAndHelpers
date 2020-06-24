@@ -1,7 +1,8 @@
 package src.helperClasses;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class CommonHelperMethods
 {
@@ -55,6 +56,65 @@ public class CommonHelperMethods
 		return reversedString;
 	}
 
+	public String signed32BitIntToBinaryString(int input)
+	{
+		String binaryBits = "";
+		String signedBit = "0";
+		if(input < 0)
+		{
+			signedBit = "1";
+		}
+		while(input > 0)
+		{
+			if(input % 2 == 1)
+			{
+				binaryBits += "1";
+			}
+			else
+			{
+				binaryBits += "0";
+			}
+			input = input/2;
+		}
+		while(binaryBits.length() < 31)
+		{
+			binaryBits += "0";
+		}
+
+		binaryBits = reverseString(binaryBits);
+
+		String finalString = signedBit;
+		if(signedBit.equals("1"))   //take the 2s compliment
+		{
+			for(int i = 0; i < binaryBits.length(); i++)
+			{
+				if(binaryBits.charAt(i) == '1')
+				{
+					finalString += "0";
+				}
+				else
+				{
+					finalString += "1";
+				}
+			}
+		}
+		else
+		{
+			finalString += binaryBits;
+		}
+
+		return finalString;
+	}
+
+	public Integer findDepthOfFlatBinaryTree(List<Integer> flatTree)
+	{
+		Integer length = flatTree.size();
+
+		//Gets the log base 2 of the length.
+		Integer result = (int)Math.ceil(Math.log(length+0.1) / Math.log(2));
+		return result;
+	}
+
 	public static String integerToBinary(Integer input)
 	{
 		Integer num = input;
@@ -72,6 +132,16 @@ public class CommonHelperMethods
 			num = num / 2;
 		}
 		return str;
+	}
+
+	public static Map<String, Integer> sortMapByValues(Map<String, Integer> inputMap)
+	{
+		Stream<Map.Entry<String,Integer>> sorted =
+				inputMap.entrySet().stream()
+						.sorted(Collections.reverseOrder(Map.Entry.comparingByValue()));
+
+		Map<String,Integer> charactersSortedByOccurrences = sorted.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+		return charactersSortedByOccurrences;
 	}
 
 	public static Integer summationOfSquares(List<Integer> numbers)

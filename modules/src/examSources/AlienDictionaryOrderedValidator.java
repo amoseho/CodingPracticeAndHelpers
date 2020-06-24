@@ -144,3 +144,100 @@ public class AlienDictionaryOrderedValidator
 		return true;
 	}
 }
+
+/* Solved solution:
+	public boolean isAlienSorted(String[] words, String order)
+    {
+        List<List<Integer>> wordsTurnedIntoAlphabeticalOrder = new ArrayList<>();
+        Map<String, Integer> alphabetToOrderMap = new HashMap<>();
+        for(int i = 0; i < order.length(); i++)
+        {
+            char c = order.charAt(i);
+            alphabetToOrderMap.put(String.valueOf(c), i);
+        }
+        //DEBUG
+        for(Map.Entry<String,Integer> entry: alphabetToOrderMap.entrySet())
+        {
+            System.out.println(entry.getKey() + " " + entry.getValue());
+        }
+        //DEBUG
+
+        for(String word : words)
+        {
+            List<Integer> wordTurnedIntoOrder = new ArrayList<>();
+            for(int i = 0; i < word.length(); i++)
+            {
+                Integer orderNumber = alphabetToOrderMap.get(String.valueOf(word.charAt(i)));
+                wordTurnedIntoOrder.add(orderNumber);
+                System.out.println("In word \"" + word + "\", we interpolate # value " + orderNumber + ".");
+            }
+            System.out.print("Adding ");
+            for(Integer i : wordTurnedIntoOrder)
+            {
+                System.out.print(i + " ");
+            }
+            System.out.println(" to the list.");
+            wordsTurnedIntoAlphabeticalOrder.add(wordTurnedIntoOrder);
+        }
+        System.out.println("Prefix length: " + wordsTurnedIntoAlphabeticalOrder.size());
+
+        wordsTurnedIntoAlphabeticalOrder = equalizeLengths(wordsTurnedIntoAlphabeticalOrder);
+
+        System.out.println("Postfix length: " + wordsTurnedIntoAlphabeticalOrder.size());
+
+        for(int i = 0; i < wordsTurnedIntoAlphabeticalOrder.size()-1; i++)
+        {
+            System.out.println("Entering Loop #" + i);
+            List<Integer> thisWord = wordsTurnedIntoAlphabeticalOrder.get(i);
+            List<Integer> nextWord = wordsTurnedIntoAlphabeticalOrder.get(i+1);
+            if(!priorLessThanNext(thisWord, nextWord))
+            {
+                System.out.println(words[i] + " does NOT come before " + words[i+1]);
+                return false;
+            }
+            System.out.println(words[i] + " comes before " + words[i+1]);
+        }
+
+        return true;
+    }
+
+    public Boolean priorLessThanNext(List<Integer> firstInts, List<Integer> secondInts)
+    {
+        for(int i = 0; i < firstInts.size(); i++)
+        {
+            if((firstInts.get(i) < secondInts.get(i)))
+            {
+                return true;
+            }
+            if((firstInts.get(i) > secondInts.get(i)))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public List<List<Integer>> equalizeLengths(List<List<Integer>> listListInt)
+    {
+        Integer maximumLength = 0;
+        for(List<Integer> innerList : listListInt)
+        {
+            if(innerList.size() > maximumLength)
+            {
+                maximumLength = innerList.size();
+            }
+        }
+
+        for(int i = 0; i < listListInt.size(); i++)
+        {
+            List<Integer> innerList = listListInt.get(i);
+            int thisSize = innerList.size();
+            for(; thisSize < maximumLength; thisSize++)
+            {
+                innerList.add(-1);
+            }
+        }
+
+        return listListInt;
+    }
+ */
