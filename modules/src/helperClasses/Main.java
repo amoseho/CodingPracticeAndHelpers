@@ -1,11 +1,53 @@
 package src.helperClasses;
 
-public class Main {
-	public static void main(String args[])
-	{
-		//StringPartitioningMaximum //WIP
-		//PasswordStengtheningChecker //WIP
+import javafx.util.Pair;
 
+import java.util.*;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
+
+public class Main {
+
+	public static void main (String [] args) throws Exception
+	{
+		Pair asdf;
+		Supplier<String> i = () -> "Car";
+		Consumer<String> c = x -> System.out.print(x.toLowerCase());
+		Consumer<String> d = x -> System.out.print(x.toUpperCase());
+		c.andThen(d).accept(i.get());
+		System.out.println();
+	}
+
+	public static List<String> getAllPermutations(List<String> optionsRemaining, String current)
+	{
+		if(optionsRemaining.size() == 0)
+		{
+			return Collections.singletonList(current);
+		}
+
+		List<String> returnPermutations = new ArrayList<>();
+
+		for(int i = 0; i < optionsRemaining.size(); i++)
+		{
+			List<String> localOptions = new ArrayList<>();
+			localOptions.addAll(optionsRemaining);
+			String addition = localOptions.remove(i);
+			String localCurrent = current+addition;
+			List<String> continuedCombinations = getAllPermutations(localOptions, localCurrent);
+
+			for(String s : continuedCombinations)
+			{
+				if(!returnPermutations.contains(s))
+				{
+					returnPermutations.add(s);
+				}
+			}
+		}
+
+		return returnPermutations;
 	}
 }
 
